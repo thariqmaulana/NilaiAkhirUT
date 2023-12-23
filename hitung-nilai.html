@@ -11,6 +11,20 @@
     #formulirTuton {
       display: none;
     }
+    button, input[type="submit"] {
+      padding: 1%;
+      margin: 1%;
+    }
+    body { 
+      background-color: yellow;
+    }
+    #help {
+      display: none;
+      margin: auto;
+    }
+    #helper {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -18,10 +32,10 @@
     <h1>Apa Sistem Belajar Yang Anda Ikuti?</h1>
   
     <div class="btn">
-      <button value="Tuton">Tuton</button>
-      <button value="Tuweb">Tuweb</button>
-      <button value="TMK">TMK</button>
-      <button value="TTM">TTM</button>
+      <button class="button" value="Tuton">Tuton</button>
+      <button class="button" value="Tuweb">Tuweb</button>
+      <button class="button" value="TMK">TMK</button>
+      <button class="button" value="TTM">TTM</button>
     </div>
   <br>
   <form id="formulirTuton" action="">
@@ -31,7 +45,21 @@
     <label for="uas">Nilai UAS :</label>
     <input type="number" id="uas" max="100" min="0">
     <br> <br>
-    <input type="submit"></input>
+    <input type="submit" value="Hitung Nilai Akhir"></input>
+    <br>
+  </form>
+  <form action="">
+    <button id="help">Saya tidak mengetahui cara menghitung nilai UAS</button>
+  </form>
+  <br>
+  <form action="" id="helper">
+    <label for="" >Jumlah benar:</label>
+    <input id="jumlahBenar" type="number" max="50" min="0">
+    <br> <br>
+    <label for="" >Jumlah Soal:</label>
+    <input id="jumlahSoal" type="number" max="50" min="30">
+    <br> <br>
+    <button id="hitung">Hitung Nilai UAS</button>
   </form>
   </div>
 </body>
@@ -39,12 +67,13 @@
     let btn = ""
     let lab = ""
 
-  document.querySelectorAll("button").forEach(button => {
+  Array.from(document.getElementsByClassName("button")).forEach(button => {
     button.addEventListener("click", () => {
       btn = button.value
       lab = button.value
       document.getElementById("lab").textContent = lab;
     
+      document.getElementById("help").style.display = "block"
       document.getElementById("formulirTuton").style.display = "block"
       console.info("tesclick")
   
@@ -64,7 +93,7 @@
       if (btn == "Tuton" ) {
       const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 3
       if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
-        alert(nilaiUasAsli)
+        alert(`Nilai Akhir Anda ${nilaiUasAsli}`)
       } else {
         alert(`Nilai Akhir Anda ${Math.round(nilaiTutorial + nilaiUas)}`)
       }
@@ -72,7 +101,7 @@
     } else if (btn == "Tuweb") {
       const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 5
       if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
-        alert(nilaiUasAsli)
+        alert(`Nilai Akhir Anda ${nilaiUasAsli}`)
       } else {
         alert(`Nilai Akhir Anda ${Math.round(nilaiTutorial + nilaiUas)}`)
       }
@@ -80,7 +109,7 @@
     } else if (btn == "TMK") {
       const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 2
       if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
-        alert(nilaiUasAsli)
+        alert(`Nilai Akhir Anda ${nilaiUasAsli}`)
       } else {
         alert(`Nilai Akhir Anda ${Math.round(nilaiTutorial + nilaiUas)}`)
       }
@@ -88,7 +117,7 @@
     } else if (btn == "TTM"){
       const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 5
       if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
-        alert(nilaiUasAsli)
+        alert(`Nilai Akhir Anda ${nilaiUasAsli}`)
       } else {
         alert(`Nilai Akhir Anda ${Math.round(nilaiTutorial + nilaiUas)}`)
       }
@@ -97,6 +126,26 @@
       
     
 })
+
+    document.getElementById("help").addEventListener("click", () => {
+      event.preventDefault()
+      document.getElementById("helper").style.display = "block"
+    })
+    document.getElementById("hitung").addEventListener("click", () => {
+      event.preventDefault();
+      let jumlahSoal = parseInt(document.getElementById("jumlahSoal").value);
+      let jumlahBenar = parseInt(document.getElementById("jumlahBenar").value);
+
+      console.info(jumlahBenar)
+
+      if (jumlahSoal < jumlahBenar || jumlahSoal > 50) {
+        alert("Input yang anda masukkan salah")
+      } else {
+        document.getElementById("uas").value = Math.round(jumlahBenar / jumlahSoal * 100);
+      }
+   
+
+    })
 
   
 
