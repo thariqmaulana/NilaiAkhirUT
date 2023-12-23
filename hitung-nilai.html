@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilai Akhir UT</title>
+  <style>
+    body > div:first-child {
+      text-align: center;
+    }    
+    #formulirTuton {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Apa Sistem Belajar Yang Anda Ikuti?</h1>
+  
+    <div class="btn">
+      <button value="Tuton">Tuton</button>
+      <button value="Tuweb">Tuweb</button>
+      <button value="TMK">TMK</button>
+      <button value="TTM">TTM</button>
+    </div>
+  
+  <form id="formulirTuton" action="">
+    <label for="tutorial">Nilai Tutorial :</label>
+    <input type="number" id="tutorial" max="100" min="0">
+    <br>
+    <label for="uas">Nilai UAS :</label>
+    <input type="number" id="uas" max="100" min="0">
+    <br>
+    <input type="submit"></input>
+  </form>
+  </div>
+</body>
+<script>
+    let btn = ""
+
+  document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => {
+      btn = button.value
+    
+      document.getElementById("formulirTuton").style.display = "block"
+      console.info("tesclick")
+  
+// document.getElementById("formulirTuton").removeEventListener("submit", () => {
+//         document.getElementById("formulirTuton").reset()
+//       })
+  
+    })
+    
+  });
+
+  document.getElementById("formulirTuton").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const nilaiUasAsli = parseInt(document.getElementById("uas").value);
+      const nilaiUas = nilaiUasAsli  / 10 * 7;
+    
+      if (btn == "Tuton" ) {
+      const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 3
+      if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
+        alert(nilaiUasAsli)
+      } else {
+        alert(Math.round(nilaiTutorial + nilaiUas))
+      }
+      console.info("tuton")
+    } else if (btn == "Tuweb") {
+      const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 5
+      if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
+        alert(nilaiUasAsli)
+      } else {
+        alert(Math.round(nilaiTutorial + nilaiUas))
+      }
+      console.info("tuweb")
+    } else if (btn == "TMK") {
+      const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 2
+      if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
+        alert(nilaiUasAsli)
+      } else {
+        alert(Math.round(nilaiTutorial + nilaiUas))
+      }
+      console.info("tmk")
+    } else if (btn == "TTM"){
+      const nilaiTutorial = parseInt(document.getElementById("tutorial").value) / 10 * 5
+      if (nilaiUasAsli > Math.round(nilaiTutorial + nilaiUas)) {
+        alert(nilaiUasAsli)
+      } else {
+        alert(Math.round(nilaiTutorial + nilaiUas))
+      }
+      console.info("ttm")
+    }
+      
+    
+})
+
+  
+
+  
+
+    
+</script>
+</html>
